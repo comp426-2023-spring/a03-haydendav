@@ -38,10 +38,10 @@ if (args.rules || args.r) {
     process.exit(0);
 }
 
-let result = args._[0]
+let play = args._[0]
 
 try {
-    console.log(JSON.stringify(rpsls(result)));
+    console.log(JSON.stringify(rpsls(play)));
 } catch (error) {
     console.log(help);
     console.log(rules);
