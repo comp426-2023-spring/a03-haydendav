@@ -32,10 +32,10 @@ if (argv.rules || argv.r) {
     process.exit(0);
 }
 
-let play = argv._[0] 
+let result = argv._[0] 
 
 try {
-    console.log(JSON.stringify(rps(play)));
+    console.log(JSON.stringify(rps(result)));
 } catch (error) {
     console.log(help);
     console.log(rules);
