@@ -1,49 +1,67 @@
 
 #!/usr/bin/env node
 
-import minimist from "minimist";
-import { rpsls } from "../lib/rpsls.js";
+import minimist from 'minimist'
 
-let args = minimist(process.argv.slice(2))
+const args = minimist(process.argv.slice(2));
+const empty = Object.keys(args).length = 1;
+const shot = ["rock", "paper", "scissors", "lizard", "spock"];
 
-const help = `Usage: node-rpsls [SHOT]
-Play the Lizard-Spock Expansion of Rock Paper Scissors (RPSLS)!
-  -h, --help        display this help message and exit
-  -r, --rules       display the rules and exit
-Examples:
-  node-rpsls        Return JSON with single player RPSLS result.
-                    e.g. {"player":"rock"}
-  node-rpsls rock   Return JSON with results for RPSLS played against a simulated opponent.
-                    e.g {"player":"rock","opponent":"Spock","result":"lose"}`
-
-const rules = `Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
-                    - Scissors CUTS Paper
-                    - Paper COVERS Rock
-                    - Rock SMOOSHES Lizard
-                    - Lizard POISONS Spock
-                    - Spock SMASHES Scissors
-                    - Scissors DECAPITATES Lizard
-                    - Lizard EATS Paper
-                    - Paper DISPROVES Spock
-                    - Spock VAPORIZES Rock
-                    - Rock CRUSHES Scissors`;
-
-if (args.help || args.h) { 
-    console.log(help);
-    process.exit(0);
+if (args.h || empty === true){
+  console.log(
+  `Usage: node-rpsls [SHOT]
+   Play the Lizard-Spock Expansion of Rock Paper Scissors (RPSLS)!
+     -h, --help        display this help message and exit
+     -r, --rules       display the rules and exit
+   Examples:
+     node-rpsls        Return JSON with single player RPSLS result.
+                       e.g. {"player":"rock"}
+     node-rpsls rock   Return JSON with results for RPSLS played against a simulated opponent.
+                       e.g {"player":"rock","opponent":"Spock","result":"lose"}
+   `)
 }
 
-if (args.rules || args.r) {
-    console.log(rules);
-    process.exit(0);
-}
+if (args.r || args.rules){
 
-let play = args._[0]
+    console.log(
+   `Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
+    - Scissors CUTS Paper
+    - Paper COVERS Rock
+    - Rock SMOOSHES Lizard
+    - Lizard POISONS Spock
+    - Spock SMASHES Scissors
+    - Scissors DECAPITATES Lizard
+    - Lizard EATS Paper
+    - Paper DISPROVES Spock
+    - Spock VAPORIZES Rock
+    - Rock CRUSHES Scissors
+    `)
+    }
 
-try {
-    console.log(JSON.stringify(rpsls(play)));
-} catch (error) {
-    console.log(help);
-    console.log(rules);
-    process.exit(1);
-}
+    if (!args.h && !args.r && (shot != 'rock' || 'paper' || 'scissors' || 'lizard' || 'spock')){
+      console.error(`[ARGUMENT] is out of range`);
+      console.log (
+     `Usage: node-rpsls [SHOT]
+      Play the Lizard-Spock Expansion of Rock Paper Scissors (RPSLS)!
+      
+        -h, --help        display this help message and exit
+        -r, --rules       display the rules and exit
+      
+      Examples:
+        node-rpsls        Return JSON with single player RPSLS result.
+                          e.g. {"player":"rock"}
+        node-rpsls rock   Return JSON with results for RPSLS played against a simulated opponent.
+                          e.g {"player":"rock","opponent":"Spock","result":"lose"}
+        Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
+                          - Scissors CUTS Paper
+                          - Paper COVERS Rock
+                          - Rock SMOOSHES Lizard
+                          - Lizard POISONS Spock
+                          - Spock SMASHES Scissors
+                          - Scissors DECAPITATES Lizard
+                          - Lizard EATS Paper
+                          - Paper DISPROVES Spock
+                          - Spock VAPORIZES Rock
+                          - Rock CRUSHES Scissors
+      `);
+      process.exit(0)}
